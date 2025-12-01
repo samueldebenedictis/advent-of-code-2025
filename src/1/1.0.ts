@@ -7,17 +7,24 @@ let count = 0;
 let dial = 50;
 
 function move(direction: string, moveValue: number) {
-  for (let i = 0; i < moveValue; i++) {
-    if (direction === "R") {
-      dial = (dial + 1) % 100;
-    } else if (direction === "L") {
-      dial = (dial - 1 + 100) % 100;
+  const value = moveValue % 100;
+  if (direction === "R") {
+    if (dial + value < 100) {
+      dial = dial + value;
     } else {
-      throw new Error("Direction not valid");
+      dial = dial + value - 100;
     }
-    if (dial === 0) {
-      count++;
+  } else if (direction === "L") {
+    if (dial - value >= 0) {
+      dial = dial - value;
+    } else {
+      dial = dial - value + 100;
     }
+  } else {
+    throw new Error("Direction not valid");
+  }
+  if (dial === 0) {
+    count++;
   }
 }
 
