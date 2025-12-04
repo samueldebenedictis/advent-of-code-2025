@@ -12,6 +12,7 @@
         "run-2-1": "tsx src/2/2.1.ts",
         "run-3-0": "tsx src/3/3.0.ts",
         "run-3-1": "tsx src/3/3.1.ts",
+        "run-4-0": "tsx src/4/4.0.ts",
         "build": "tsc",
         "start": "node dist/index.js",
         "biome": "npx biome check --fix --unsafe"
