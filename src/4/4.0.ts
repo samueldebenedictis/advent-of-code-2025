@@ -5,8 +5,6 @@ const cells: boolean[][] = file
   .split("\n")
   .map((lines) => lines.split("").map((x) => x === "@"));
 
-console.log(cells);
-
 const limitY = cells.length;
 const limitX = (cells[0] as boolean[]).length;
 
@@ -33,12 +31,9 @@ for (let y = 0; y < limitY; y++) {
     const adiacents = [nw, n, ne, w, e, sw, s, se].map(
       (el) => (el ? 1 : 0) as number
     );
-    // console.log(nw, n, ne, w, e, sw, s, se);
-    // console.log(adiacents);
 
     const sum = adiacents.reduce((a, b) => a + b);
     if (self && sum < 4) {
-      console.log("found", "y", y, "x", x);
       res++;
     }
   }
