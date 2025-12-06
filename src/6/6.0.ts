@@ -1,35 +1,30 @@
-import * as fs from "node:fs";
+import * as fs from 'node:fs';
 
-const file = fs.readFileSync("src/6/input.txt", "utf8");
+const file = fs.readFileSync('src/6/input.txt', 'utf8');
 
-const lines = file.split("\n");
-const values = lines.map((l) => l.split(" ").filter((el) => el !== ""));
+const lines = file.split('\n');
+const values = lines.map((l) => l.split(' ').filter((el) => el !== ''));
 
 const numbers = values.slice(0, -1);
 const ops = values.slice(-1)[0];
 
-console.log(numbers);
-console.log(ops);
-
-const res: number[] = numbers.map((el) => 0);
+const res: number[] = numbers.map((_el) => 0);
 
 ops?.forEach((op, index) => {
-  if (op === "+") {
-    let sum = 0;
-    for (const line of numbers) {
-      sum += parseInt(line[index] as string, 10);
+    if (op === '+') {
+        let sum = 0;
+        for (const line of numbers) {
+            sum += parseInt(line[index] as string, 10);
+        }
+        res[index] = sum;
     }
-    res[index] = sum;
-  }
-  if (op === "*") {
-    let mul = 1;
-    for (const line of numbers) {
-      mul *= parseInt(line[index] as string, 10);
+    if (op === '*') {
+        let mul = 1;
+        for (const line of numbers) {
+            mul *= parseInt(line[index] as string, 10);
+        }
+        res[index] = mul;
     }
-    res[index] = mul;
-  }
 });
-
-console.log(res);
 
 console.log(res.reduce((a, b) => a + b));
