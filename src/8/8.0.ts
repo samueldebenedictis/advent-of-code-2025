@@ -1,7 +1,7 @@
 import * as fs from 'node:fs';
 
-type Juction = { id: number; x: number; y: number; z: number };
-const juctions: Juction[] = [];
+type Junction = { id: number; x: number; y: number; z: number };
+const junctions: Junction[] = [];
 
 class Circuits {
     circuits: number[][];
@@ -21,13 +21,12 @@ class Circuits {
             const sOther = this.circuits.filter(
                 (s) => !s.includes(a) && !s.includes(b),
             );
-            console.log('merge', sA, sB);
             this.circuits = [...sOther, [...sA, ...sB]];
         }
     }
 }
 
-function dist(a: Juction, b: Juction) {
+function dist(a: Junction, b: Junction) {
     return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2 + (a.z - b.z) ** 2);
 }
 
@@ -38,36 +37,34 @@ for (const { index, line } of lines.map((line, index) => ({ index, line }))) {
     const [x, y, z] = (line.split(',') as string[]).map((el) =>
         parseInt(el, 10),
     );
-    juctions.push({
+    junctions.push({
         id: index,
         x: x as number,
         y: y as number,
         z: z as number,
     });
 }
-console.log(juctions);
 
-const set = new Circuits(juctions.map((el) => el.id));
+const set = new Circuits(junctions.map((el) => el.id));
 const distances = [];
 
-for (let i = 0; i < juctions.length; i++) {
-    for (let j = i + 1; j < juctions.length; j++) {
-        const a = juctions[i];
-        const b = juctions[j];
-        distances.push({ a, b, dist: dist(a, b) });
+for (let i = 0; i < junctions.length; i++) {
+    for (let j = i + 1; j < junctions.length; j++) {
+        const a = junctions[i];
+        const b = junctions[j];
+        distances.push({ a, b, dist: dist(a as Junction, b as Junction) });
     }
 }
 
 distances.sort((a, b) => a.dist - b.dist);
 
 for (let i = 0; i < 1000; i++) {
-    set.merge(distances[i]?.a.id, distances[i]?.b.id);
+    const d = distances[i] as { a: Junction; b: Junction };
+    set.merge(d.a.id, d.b.id);
 }
-// console.log(distances);
-// console.log(set.circuits.map((el) => el.length).sort((a, b) => b - a));
+
 const sorted = set.circuits.map((el) => el.length).sort((a, b) => b - a);
 
-const res = sorted[0] * sorted[1] * sorted[2];
+const res =
+    (sorted[0] as number) * (sorted[1] as number) * (sorted[2] as number);
 console.log(res);
-
-console.log(set);
