@@ -22,6 +22,7 @@
         "7-1": "tsx src/7/7.1.ts",
         "8-0": "tsx src/8/8.0.ts",
         "8-1": "tsx src/8/8.1.ts",
+        "9-0": "tsx src/9/9.0.ts",
         "build": "tsc",
         "start": "node dist/index.js",
         "biome": "npx biome check --fix --unsafe"
