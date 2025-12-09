@@ -4,9 +4,9 @@ type Tile = { id: number; x: number; y: number };
 const tiles: Tile[] = [];
 
 const file = fs.readFileSync('src/9/input.txt', 'utf8');
+const lines = file.split('\n');
 
-const line = file.split('\n');
-line.forEach((value, index) => {
+lines.forEach((value, index) => {
     const [x, y] = value.split(',').map((el) => parseInt(el, 10));
     tiles.push({ id: index, x: x as number, y: y as number });
 });
