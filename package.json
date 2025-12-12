@@ -28,6 +28,7 @@
         "10-1": "tsx src/10/10.1.ts",
         "11-0": "tsx src/11/11.0.ts",
         "11-1": "tsx src/11/11.1.ts",
+        "12-0": "tsx src/12/12.0.ts",
         "build": "tsc",
         "start": "node dist/index.js",
         "biome": "npx biome check --fix --unsafe"
